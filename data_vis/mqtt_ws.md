@@ -1,2 +1,2 @@
-user: hacktheparadies
-uri: wss://mqttbr.jena.de:8081
+- user: hacktheparadies
+- uri: wss://mqttbr.jena.de:8081
