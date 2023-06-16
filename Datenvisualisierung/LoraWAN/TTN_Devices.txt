@@ -1,0 +1,62 @@
+# Bodenfeuchte
+
+## Baum 409
+### Temp
+from(bucket: "ttn")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "scj-sensors-01")
+  |> filter(fn: (r) => r["_field"] == "temp_SOIL_f")
+  |> filter(fn: (r) => r["dev_eui"] == "A8404155F184BF7C")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "ttn")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "scj-sensors-01")
+  |> filter(fn: (r) => r["_field"] == "water_SOIL_f")
+  |> filter(fn: (r) => r["dev_eui"] == "A8404155F184BF7C")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### PH
+from(bucket: "ttn")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "scj-sensors-01")
+  |> filter(fn: (r) => r["_field"] == "PH1_SOIL_f")
+  |> filter(fn: (r) => r["dev_eui"] == "A84041C3E1849B30")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Baum 410
+### Temp
+from(bucket: "ttn")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "scj-sensors-01")
+  |> filter(fn: (r) => r["_field"] == "temp_SOIL_f")
+  |> filter(fn: (r) => r["dev_eui"] == "A840418F4184BF79")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "ttn")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "scj-sensors-01")
+  |> filter(fn: (r) => r["_field"] == "water_SOIL_f")
+  |> filter(fn: (r) => r["dev_eui"] == "A840418F4184BF79")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### PH
+from(bucket: "ttn")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "scj-sensors-01")
+  |> filter(fn: (r) => r["_field"] == "PH1_SOIL_f")
+  |> filter(fn: (r) => r["dev_eui"] == "A84041D2F1849B31")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+# Parking
+## Parking01
+### Parking
+  from(bucket: "ttn")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "scj-sensors-01")
+  |> filter(fn: (r) => r["_field"] == "occupied")
+  |> filter(fn: (r) => r["dev_eui"] == "FCD6BD000019A9EC")

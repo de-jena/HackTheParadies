@@ -1,0 +1,303 @@
+# Bodenfeuchte
+
+## Baum P2881
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_1_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "KSJ_Stadtbaumpflege")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0423003a3" or r["dev_eui"] == "2cf7f1c0423003a2")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r["dev_eui"] }))
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_2_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "KSJ_Stadtbaumpflege")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0423003a3" or r["dev_eui"] == "2cf7f1c0423003a2")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r["dev_eui"] }))
+### electrical conductivity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_0_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "KSJ_Stadtbaumpflege")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0423003a3" or r["dev_eui"] == "2cf7f1c0423003a2")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r["dev_eui"] }))
+
+## Baum P2882
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_1_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "KSJ_Stadtbaumpflege")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c04230037d" or r["dev_eui"] == "2cf7f1c042300393")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r["dev_eui"] }))
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_2_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "KSJ_Stadtbaumpflege")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c04230037d" or r["dev_eui"] == "2cf7f1c042300393")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r["dev_eui"] }))
+### electrical conductivity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_0_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "KSJ_Stadtbaumpflege")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c04230037d" or r["dev_eui"] == "2cf7f1c042300393")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r["dev_eui"] }))
+
+## Stadtforst: WZE_EH2_10cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041f0d186d0ef")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041f0d186d0ef")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_EH2_20cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a8404144e186d0ed")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a8404144e186d0ed")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_k3_10cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041f0e186d109")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041f0e186d109")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_k3_20cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a8404152c186d106")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a8404152c186d106")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_OB1_10cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a8404123a186d10c")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a8404123a186d10c")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_OB1_20cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041895186d10b")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041895186d10b")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_OB1_35cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a840413cd186d10a")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a840413cd186d10a")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_OB3_10cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041be6186d10e")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a84041be6186d10e")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+## Stadtforst: WZE_OB3_20cm
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_temp_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a840417f7186d10d")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_water_SOIL_f")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["dev_eui"] == "a840417f7186d10d")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+
+# Wetter
+## Wetter01
+### Temp
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_0_0_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Humidity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_0_1_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Rain
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_1_1_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Barometric Preassure
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_1_2_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Light intensity
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_0_2_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### UV Index
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_0_3_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Wind Speed
+from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_0_4_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+### Wind Direction
+  from(bucket: "chirpstack")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "device_frmpayload_data_messages_1_0_measurementValue")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["application_name"] == "SenseCAPS2120 Wetterstationen")
+  |> filter(fn: (r) => r["dev_eui"] == "2cf7f1c0443003a4")
+  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
+  |> yield(name: "mean")

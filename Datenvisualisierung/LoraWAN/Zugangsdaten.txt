@@ -1,0 +1,11 @@
+# InfluxDB_URL = https://influxdb.ttntst.jena.de/
+
+# Chirpstack
+token = "6nae47TK0YcYw-AXrR3mt7aHI5Pc2SIqyuIGHkbgjBU5H7IDzQ8XHg03G1KGWFC-DhIXWxO0TWxYO68w0CidcQ=="
+org = "jena"
+bucket = "chirpstack"
+
+# TTN (The Things Network)
+token = "6nae47TK0YcYw-AXrR3mt7aHI5Pc2SIqyuIGHkbgjBU5H7IDzQ8XHg03G1KGWFC-DhIXWxO0TWxYO68w0CidcQ=="
+org = "jena"
+bucket = "ttn"
